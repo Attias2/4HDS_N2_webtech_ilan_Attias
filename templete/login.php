@@ -8,7 +8,7 @@ if (isset($_POST['inputEmail'])){
 
   $inputPassword = htmlspecialchars($_POST['inputPassword']);
 
-  $query = "SELECT * FROM `users` WHERE ``='".$inputEmail."' 
+  $query = "SELECT * FROM `users` WHERE `email`='".$inputEmail."' 
   and `password`='".hash('sha256', $inputPassword)."'";
 
 
@@ -25,7 +25,7 @@ $result = $BdD2 ->query($query)-> fetchAll();
 
 
 
- // header('location: '.$result['type'].'/accueil.php');
+header('location: '.$result['type'].'/index.php');
 
 
   }
@@ -55,7 +55,7 @@ $result = $BdD2 ->query($query)-> fetchAll();
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form action="" method="post">
+                                        <form action="" method="post" id="form">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" name="inputEmail" type="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
@@ -70,12 +70,12 @@ $result = $BdD2 ->query($query)-> fetchAll();
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.html">Forgot Password?</a>
-                                                <a class="btn btn-primary" href="index.html">Login</a>
+                                                <a class="btn btn-primary" onclick="document.forms['form'].submit()">Login</a>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -100,6 +100,7 @@ $result = $BdD2 ->query($query)-> fetchAll();
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
+        <script type="text/javascript"></script>
     </body>
 </html>
 <?php
