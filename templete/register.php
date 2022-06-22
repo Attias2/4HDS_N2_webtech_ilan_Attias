@@ -1,4 +1,8 @@
 <?php
+//header('Content-Type: application/json');
+ include "../config.php";
+ //header('Content-Type: application/json;charset=utf-8');
+
 function randomToken($car) {
 $string = "";
 $chaine = 
@@ -13,9 +17,9 @@ $string .= $chaine [rand () % strlen ( $chaine )];
 
 $message ="";
 //var_dump($_POST);
-var_dump(!in_array("",$_POST));
+//var_dump(!in_array("",$_POST));
 if (!in_array("",$_POST)&&(!empty($_POST))) {
-$inputFirstName = htmlspecialchars($_POST['inputFirstName']);
+$inputFirstName =htmlspecialchars($_POST['inputFirstName']);
 $inputLastName  = htmlspecialchars($_POST['inputLastName']);
 $inputEmail  = htmlspecialchars($_POST['inputEmail']);
 $inputPassword  = htmlspecialchars($_POST['inputPassword']);
@@ -23,9 +27,19 @@ $inputPasswordConfirm  = htmlspecialchars($_POST['inputPasswordConfirm']);
     if ($inputPassword !==$inputPasswordConfirm) {
         $message = "Nom conforme";
     }else{
+        //hash('sha256', $password)
         $token =randomToken("r");
+        $sth = $BdD2 ->prepare("INSERT INTO `users`( `nom`, `prenom`, `token`, `email`, `password`)
+                        VALUES (:nom, :prenom, :token, :email, :password)");
+    $sth -> execute(
+        array(':nom'     => $inputFirstName,
+              ':prenom'  => $inputLastName,
+              ':token'   => $token,
+              ':email'   => $inputEmail,
+              ':password' => hash('sha256', $inputPassword)));
     }
 }
+
 
 
 

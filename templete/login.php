@@ -20,12 +20,13 @@ $result = $BdD2 ->query($query)-> fetchAll();
     $_SESSION['nom']    = $result['nom'];
     $_SESSION['prenom'] = $result['prenom'];
     $_SESSION['Email']  = $result['email'];
+    $_SESSION['token']  = $result['token'];
     $_SESSION['type']   = $result['nom'];
     $_SESSION['Id']     = $result['Id'];
 
 
 
-header('location: '.$result['type'].'/index.php');
+header('location: index.php');
 
 
   }
@@ -69,7 +70,7 @@ header('location: '.$result['type'].'/index.php');
                                                 <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.html">Forgot Password?</a>
+                                                <a class="small" href="password.php">Forgot Password?</a>
                                                 <a class="btn btn-primary" onclick="document.forms['form'].submit()">Login</a>
                                             </div>
                                         </form>
